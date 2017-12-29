@@ -9,7 +9,9 @@ import {
   Platform,
   StyleSheet,
   Text,
-  View
+  View,
+  Switch,
+  Alert
 } from 'react-native';
 
 const instructions = Platform.select({
@@ -19,7 +21,22 @@ const instructions = Platform.select({
     'Shake or press menu button for dev menu',
 });
 
+// export default class App extends Component<{}> {
 export default class App extends Component {
+
+    // 构造
+    constructor(props) {
+        super(props);
+        // 初始状态
+        this.state = {
+
+            value: false
+
+        };
+    }
+
+
+
   render() {
     return (
       <View style={styles.container}>
@@ -32,6 +49,25 @@ export default class App extends Component {
         <Text style={styles.instructions}>
           {instructions}
         </Text>
+        <View style={styles.redView}></View>
+        <Switch 
+
+            value={this.state.value}
+
+            onValueChange = {(flag) => {
+              this.setState({value:flag})
+                Alert.alert(
+                  'Alert Title',
+                  'My Alert Msg',
+                  [
+                    {text: 'Ask me later', onPress: () => console.log('Ask me later pressed')},
+                    {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+                    {text: 'OK', onPress: () => console.log('OK Pressed')},
+                  ],
+                  { cancelable: false }
+                )
+            }}
+        />
       </View>
     );
   }
@@ -43,6 +79,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
+  },
+  redView:{
+    backgroundColor: 'red',
+    width: 20,
+    height:200,
   },
   welcome: {
     fontSize: 20,
