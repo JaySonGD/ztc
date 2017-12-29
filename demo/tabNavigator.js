@@ -201,8 +201,8 @@ export default class App extends Component{
                 <TabNavigator.Item
                     selected={this.state.selectedTab === 'home'}
                     title="Home"
-                    renderIcon={() => <Image source={require('../images/ys.png')} />}
-                    renderSelectedIcon={() => <Image source={require('../images/ys.png')} />}
+                    renderIcon={() => <Image source={require('./images/ys.png')} />}
+                    renderSelectedIcon={() => <Image source={require('./images/ys.png')} />}
                     badgeText="1"
                     onPress={() => this.setState({ selectedTab: 'home' })}>
                     <Home/>
