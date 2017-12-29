@@ -13,11 +13,11 @@ import {
     NavigatorIOS,
 } from 'react-native';
 
-import HomeView from '../Home/HomeView';
+import HomeView from '../home/HomeView';
 
 
 
-class Main extends Component{
+class Index extends Component{
 
     constructor(props){
         super(props)
@@ -27,12 +27,9 @@ class Main extends Component{
 
         console.log(props)
 
-        //this.props.func = this._seleItem().bind(this)
 
     }
-    _seleItem(){
 
-    }
 
 
     render(){
@@ -101,7 +98,7 @@ export default class App extends Component{
 
             initialRoute={
                 {
-                    component: Main ,
+                    component: Index ,
                     title: this.state.defaultTitle,
                     passProps : {'name':'mainNav'},
                     barTintColor:'orange',

@@ -210,8 +210,8 @@ export default class App extends Component{
                 <TabNavigator.Item
                     selected={this.state.selectedTab === 'profile'}
                     title="Profile"
-                    renderIcon={() =><Image source={require('../images/ys.png')} />}
-                    renderSelectedIcon={() => <Image source={require('../images/ys.png')} />}
+                    renderIcon={() =><Image source={require('./images/ys.png')} />}
+                    renderSelectedIcon={() => <Image source={require('./images/ys.png')} />}
                     // renderBadge={() =>
                     //     <Button style={{width:50,height:50,backgroundColor:'red'}} title={'ok'} onPress={()=>{
                     //
