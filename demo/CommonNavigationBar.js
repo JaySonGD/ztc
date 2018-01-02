@@ -88,16 +88,15 @@ const styles = StyleSheet.create({
     barStyle:{
         height:navigationBarHeight,
         width:Screen.width,
-        backgroundColor:'white',
+        backgroundColor:'orange',
         flexDirection:'row',
     },
     container:{
-        backgroundColor:'white',
+        backgroundColor:'orange',
         width:Screen.width,
 
         flexDirection:'row',
         height:44,
-        backgroundColor:'white',
         position:'absolute',
         bottom:0
 
@@ -105,19 +104,19 @@ const styles = StyleSheet.create({
     },
     leftStyle:{
         flex:1,
-        backgroundColor:'white',
+        // backgroundColor:'white',
         justifyContent:'center',
         alignItems:"center",
     },
     middleStyle:{
         flex:4,
-        backgroundColor:'white',
+        // backgroundColor:'white',
         justifyContent:'center',
         alignItems:'center',
     },
     rightStyle:{
         flex:1,
-        backgroundColor:'white',
+        // backgroundColor:'white',
         justifyContent:'center',
         alignItems:'center',
     },
