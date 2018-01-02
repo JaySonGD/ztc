@@ -76,6 +76,7 @@ class Home extends Component{
                                   }}
                                   onPressOut={()=>{
                                       AlertIOS.alert('onPressOut')
+                                      // alert('111')
                                   }}
                                   // disabled={true}
 
