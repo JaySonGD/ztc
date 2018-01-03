@@ -52,7 +52,7 @@ export default class RadioView extends Component{
         this.state = {
             loading : true,
             dataSource : ds.cloneWithRows(DataJson),
-            curPlayUrl:'http://rthkaudio2-lh.akamaihd.net/i/radio2_1@355865/master.m3u8',
+            rowData : DataJson[0],
         }
     }
 
@@ -81,8 +81,9 @@ export default class RadioView extends Component{
         />)
     }
     _renderRadio(){
-        var uri = this.state.curPlayUrl
-        console.log('URL--->'.uri)
+
+        this.state.rowData? console.log(11):console.log(22)
+        var obj = this.state.rowData;
         return(
             <View>
                 <ListView dataSource={this.state.dataSource}
@@ -90,7 +91,7 @@ export default class RadioView extends Component{
                           renderRow={this._renderRow.bind(this)}
                           pageSize={20}
                 />
-                (this.state.curPlayUrl.length > 0)? <Video source={{uri:uri}}
+                this.state.rowData? <Video source={{uri:obj.url}}
                                               style={styles.videotyle}/>:null
             </View>
 
@@ -118,7 +119,7 @@ export default class RadioView extends Component{
 
     _didClickRow(rowData){
         this.setState({
-            curPlayUrl:rowData.url,
+            rowData:rowData,
         })
     }
 }
