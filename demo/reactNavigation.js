@@ -15,6 +15,7 @@ import {
 import { StackNavigator } from 'react-navigation';
 
 
+
 class ChatScreen extends Component {
     static navigationOptions = {
         title: 'Chat with Lucy',
