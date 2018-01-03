@@ -57,7 +57,7 @@ export default class RadioView extends Component{
     }
 
     componentDidMount() {
-        HttpRequest.get('http://oz3odd99d.bkt.clouddn.com/HKRadio.json',null,(json)=>{
+        HttpRequest.get('http://oz3odd9d.bkt.com/HKRadio.json',null,(json)=>{
             this.setState({
                 loading:false,
                 // dataSource:json,

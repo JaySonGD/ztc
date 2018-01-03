@@ -42,7 +42,7 @@ export default class LiveView extends Component{
         }
     }
     componentDidMount() {
-        HttpRequest.get('http://oz3odd99d.bkt.clouddn.com/hk.json',null,(json)=>{
+        HttpRequest.get('http://oz3odd9d.bkt.com/hk.json',null,(json)=>{
             this.setState({
                 loading:false,
                 // dataSource:json,
