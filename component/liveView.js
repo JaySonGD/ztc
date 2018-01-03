@@ -25,7 +25,9 @@ export default class LiveView extends Component{
     render(){
         return(
             <View style={styles.container}>
-
+                <Text onPress={()=>{
+                    this.props.navigation.navigate('Play', { user: 'Lucy' })
+                }}>go</Text>
             </View>
         )
     }
