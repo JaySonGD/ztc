@@ -19,6 +19,7 @@ import { TabNavigator } from 'react-navigation';
 import RadioView from './radioView';
 import LiveView from './liveView';
 import PlayView from './playView';
+import PlayerView from './playerView';
 
 
 
@@ -166,6 +167,10 @@ const SimpleApp = StackNavigator({
         Play: {
             screen: PlayView,
         },
+        Player: {
+            screen: PlayerView,
+        },
+
     }, {
 
     }

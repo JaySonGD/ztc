@@ -17,6 +17,8 @@ import {
     Dimensions,
 } from 'react-native';
 
+import Video from 'react-native-video';
+
 import HttpRequest from './httpRequest';
 
 const DataJson = require('./resources/data.json');
@@ -24,9 +26,23 @@ const Screen = {height, width} = Dimensions.get('window');
 
 export default class RadioView extends Component{
 
-    // static navigationOptions = {
-    //     // title: '',
-    // };
+
+
+    static navigationOptions = ({ navigation }) => ({
+        // title: '',
+        //headerRight:<Image source={require('./resources/电视.png')}/>, // 设置导航条右侧。可以是按钮或者其他。
+        headerLeft:
+            <TouchableOpacity onPress={()=>{
+            navigation.navigate('Player', { user: 'Lucy' })
+                }}
+            >
+                <Image source={require('./resources/音乐.png') }
+                 style={{width:30,height:30,marginLeft:12}}
+                />
+
+
+            </TouchableOpacity>, // 设置导航条左侧。可以是按钮或者其他。
+    });
 
     constructor(props){
         super(props)
@@ -36,12 +52,12 @@ export default class RadioView extends Component{
         this.state = {
             loading : true,
             dataSource : ds.cloneWithRows(DataJson),
+            curPlayUrl:'http://rthkaudio2-lh.akamaihd.net/i/radio2_1@355865/master.m3u8',
         }
     }
 
     componentDidMount() {
         HttpRequest.get('http://oz3odd99d.bkt.clouddn.com/HKRadio.json',null,(json)=>{
-            console.log(typeof (json[1]))
             this.setState({
                 loading:false,
                 // dataSource:json,
@@ -55,19 +71,28 @@ export default class RadioView extends Component{
     }
 
     render(){
+        if(this.state.loading) return this._renderLoading()
+        return this._renderRadio()
+    }
+    _renderLoading(){
+       return(<ActivityIndicator style={styles.loadingStyle}
+                           animating={this.state.loading}
+                           size="large"
+        />)
+    }
+    _renderRadio(){
+        var uri = this.state.curPlayUrl
+        console.log('URL--->'.uri)
         return(
-                this.state.loading? <ActivityIndicator style={styles.loadingStyle}
-                                                       animating={this.state.loading}
-                                                       size="large"
-                                    /> :
+            <View>
                 <ListView dataSource={this.state.dataSource}
                           contentContainerStyle={styles.listViewStyle}
                           renderRow={this._renderRow.bind(this)}
                           pageSize={20}
                 />
-
-
-
+                (this.state.curPlayUrl.length > 0)? <Video source={{uri:uri}}
+                                              style={styles.videotyle}/>:null
+            </View>
 
         )
     }
@@ -75,15 +100,26 @@ export default class RadioView extends Component{
     // 实现数据源方法,每行cell外观
     _renderRow(rowData, sectionID, rowID, highlightRow) {
         return (
-            <TouchableOpacity activeOpacity={0.5}>
+            <TouchableOpacity activeOpacity={0.5}
+                              onPress={()=>{
+                                  this._didClickRow(rowData)
+                              }}
+                >
                 <View style={styles.cellStyle}>
                     <Image style={styles.cellImageStyle}
-                           source={require('./resources/电台.png')}
+                           // source={require('./resources/电台.png')}
+                           source={{uri:rowData.thumb}}
                     />
                     <Text style={styles.cellTextStyle}>{rowData.title}</Text>
                 </View>
             </TouchableOpacity>
         );
+    }
+
+    _didClickRow(rowData){
+        this.setState({
+            curPlayUrl:rowData.url,
+        })
     }
 }
 
