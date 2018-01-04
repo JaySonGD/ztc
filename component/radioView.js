@@ -51,16 +51,16 @@ export default class RadioView extends Component{
         })
         this.state = {
             loading : true,
-            dataSource : ds.cloneWithRows(DataJson),
-            rowData : DataJson[0],
+            dataSource : ds.cloneWithRows([]),
+            rowData : null,
         }
     }
 
     componentDidMount() {
-        HttpRequest.get('http://oz3odd9d.bkt.com/HKRadio.json',null,(json)=>{
+        HttpRequest.get('http://oz3odd99d.bkt.clouddn.com/HKRadio.json',null,(json)=>{
             this.setState({
                 loading:false,
-                // dataSource:json,
+                dataSource:(new ListView.DataSource({rowHasChanged:(r1,r2)=> r1 !== r2})).cloneWithRows(json),
             })
         },(error)=>{
            console.log(error)
@@ -84,6 +84,7 @@ export default class RadioView extends Component{
 
         this.state.rowData? console.log(11):console.log(22)
         var obj = this.state.rowData;
+        var self = this
         return(
             <View>
                 <ListView dataSource={this.state.dataSource}
@@ -91,8 +92,8 @@ export default class RadioView extends Component{
                           renderRow={this._renderRow.bind(this)}
                           pageSize={20}
                 />
-                this.state.rowData? <Video source={{uri:obj.url}}
-                                              style={styles.videotyle}/>:null
+                {this.state.rowData? <Video source={{uri:obj.url}}
+                                              style={styles.videotyle}/>:null}
             </View>
 
         )

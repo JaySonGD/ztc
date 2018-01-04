@@ -38,14 +38,13 @@ export default class LiveView extends Component{
         this.state = {
             loading : true,
             dataSource : ds.cloneWithRows(DataJson),
-            rowData : DataJson[0],
         }
     }
     componentDidMount() {
         HttpRequest.get('http://oz3odd9d.bkt.com/hk.json',null,(json)=>{
             this.setState({
                 loading:false,
-                // dataSource:json,
+                dataSource:(new ListView.DataSource({rowHasChanged:(r1,r2)=> r1 !== r2})).cloneWithRows(json),
             })
         },(error)=>{
             console.log(error)
@@ -95,10 +94,6 @@ export default class LiveView extends Component{
     }
 
     _didClickRow(rowData){
-        this.setState({
-            rowData:rowData,
-        })
-
         this.props.navigation.navigate('Play', { data: rowData })
     }
 }
