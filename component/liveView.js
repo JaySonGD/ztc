@@ -16,10 +16,12 @@ import {
     ListView,
     ActivityIndicator,
     TouchableOpacity,
-
+    RefreshControl,
 } from 'react-native';
 
+
 import HttpRequest from './httpRequest';
+
 
 const DataJson = require('./resources/tv.json');
 const Screen = {height, width} = Dimensions.get('window');
@@ -36,44 +38,125 @@ export default class LiveView extends Component{
             rowHasChanged:(r1,r2) =>  r1 !== r2
         })
         this.state = {
-            loading : true,
-            dataSource : ds.cloneWithRows(DataJson),
+            loading : false,
+            dataSource : ds.cloneWithRows([]),
+            isRefreshing:false,
+            loadMore:false,
         }
     }
+
+
     componentDidMount() {
-        HttpRequest.get('http://oz3odd9d.bkt.com/hk.json',null,(json)=>{
+        this._loadData()
+    }
+
+    _loadData(){
+        HttpRequest.get('http://oz3odd99d.bkt.clouddn.com/hk.json',null,(json)=>{
             this.setState({
                 loading:false,
-                dataSource:(new ListView.DataSource({rowHasChanged:(r1,r2)=> r1 !== r2})).cloneWithRows(json),
+                dataSource:this.state.dataSource.cloneWithRows(json),
+                loadMore:false,
+                isRefreshing:false,
             })
         },(error)=>{
-            console.log(error)
             this.setState({
                 loading:false,
+                loadMore:false,
+                isRefreshing:false,
             })
         })
     }
+
     render(){
             if(this.state.loading) return this._renderLoading()
             return this._renderRadio()
     }
+
     _renderLoading(){
         return(<ActivityIndicator style={styles.loadingStyle}
                                   animating={this.state.loading}
                                   size="large"
         />)
     }
+
     _renderRadio(){
 
+        const FooterView = this.state.loadMore?
+            <View style={styles.footerStyle}>
+                <ActivityIndicator/>
+                <Text style={styles.footerTextStyle}>加载更多•••</Text>
+            </View> : null
         return(
                 <ListView dataSource={this.state.dataSource}
                           contentContainerStyle={styles.listViewStyle}
                           renderRow={this._renderRow.bind(this)}
                           pageSize={20}
+                          enableEmptySections={true}
+
+                          onEndReachedThreshold={5}
+                          //onEndReached={this._onEndReached.bind(this)}
+                          onEndReached={()=>{
+                              this._onEndReached()
+                          }}
+
+                          renderFooter={() => FooterView}
+
+                          refreshControl={
+                              <RefreshControl
+                                  refreshing={this.state.isRefreshing}
+                                  //onRefresh={this._onRefresh.bind(this)}
+                                  onRefresh={()=>{
+                                      this._onRefresh()
+                                    }
+                                  }
+
+                                  tintColor="#ff0000"
+                                  title="Loading..."
+                                  titleColor="#00ff00"
+                                  colors={['#ff0000', '#00ff00', '#0000ff']}
+                                  progressBackgroundColor="#ffff00"
+                              />
+                          }
                 />
 
         )
     }
+
+    _onRefresh() {
+        var timestamp = Date.parse(new Date());
+        timestamp = timestamp / 1000;
+        //当前时间戳为：1403149534
+        console.log("当前时间戳为：" + timestamp);
+
+        console.log("下拉载数据：");
+        this.setState({
+            isRefreshing: true,
+        })
+        setTimeout(()=>{
+            this._loadData();
+        },2000)
+
+
+    }
+
+    _onEndReached() {
+
+        var timestamp = Date.parse(new Date());
+        timestamp = timestamp / 1000;
+        //当前时间戳为：1403149534
+        console.log("当前时间戳为：" + timestamp);
+
+        console.log("加载数据：");
+
+        this.setState({
+            loadMore: true,
+        });
+        setTimeout(()=>{
+            this._loadData();
+        },2000)
+
+    }
+
 
     // 实现数据源方法,每行cell外观
     _renderRow(rowData, sectionID, rowID, highlightRow) {
@@ -133,5 +216,20 @@ const styles = StyleSheet.create({
         fontSize:12,
         color:'#000',
     },
+    footerStyle:{
+        height:25,
+        width: Screen.width,
+        //backgroundColor:'red',
+        justifyContent:'center',
+        alignItems:'center',
+        paddingTop:10,
+        flexDirection:'row',
+    },
+    footerTextStyle:{
+        color:'orange',
+        fontSize:14,
+        marginLeft:5,
+    },
+
 
 })

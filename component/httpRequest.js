@@ -133,6 +133,7 @@ export default class HttpRequest{
             .catch((error)=>{
                 failure(error);
             })
+            .done();
     }
 
 

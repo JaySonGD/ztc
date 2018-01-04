@@ -60,7 +60,7 @@ export default class RadioView extends Component{
         HttpRequest.get('http://oz3odd99d.bkt.clouddn.com/HKRadio.json',null,(json)=>{
             this.setState({
                 loading:false,
-                dataSource:(new ListView.DataSource({rowHasChanged:(r1,r2)=> r1 !== r2})).cloneWithRows(json),
+                dataSource:this.state.dataSource.cloneWithRows(json),
             })
         },(error)=>{
            console.log(error)
@@ -82,7 +82,6 @@ export default class RadioView extends Component{
     }
     _renderRadio(){
 
-        this.state.rowData? console.log(11):console.log(22)
         var obj = this.state.rowData;
         var self = this
         return(
