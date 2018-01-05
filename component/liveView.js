@@ -102,7 +102,7 @@ export default class LiveView extends Component{
                           pageSize={20}
                           enableEmptySections={true}
 
-                          onEndReachedThreshold={0}
+                          onEndReachedThreshold={-20}
                           //onEndReached={this._onEndReached.bind(this)}
                           onEndReached={()=>{
                               this._onEndReached()
@@ -210,7 +210,7 @@ const styles = StyleSheet.create({
         backgroundColor:'#e6e6e6',
         flexDirection:'row',
         flexWrap:'wrap',
-        paddingBottom:10,
+        // paddingBottom:10,
     },
     cellStyle:{
         height:(Screen.width - 20 )/3,
@@ -233,12 +233,12 @@ const styles = StyleSheet.create({
         color:'#000',
     },
     footerStyle:{
-        height:25,
+        height:35,
         width: Screen.width,
         //backgroundColor:'red',
         justifyContent:'center',
         alignItems:'center',
-        paddingTop:10,
+        //paddingTop:10,
         flexDirection:'row',
     },
     footerTextStyle:{
