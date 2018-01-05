@@ -19,6 +19,7 @@ import {
     RefreshControl,
 } from 'react-native';
 
+import Toast, {DURATION} from 'react-native-easy-toast';
 
 import HttpRequest from './httpRequest';
 
@@ -58,12 +59,18 @@ export default class LiveView extends Component{
                 loadMore:false,
                 isRefreshing:false,
             })
+            this.refs.toast.show('加载成功!');
+            console.log('加载成功!');
+
         },(error)=>{
             this.setState({
                 loading:false,
                 loadMore:false,
                 isRefreshing:false,
             })
+            this.refs.toast.show('加载失败!');
+            console.log('加载失败!');
+
         })
     }
 
@@ -87,13 +94,15 @@ export default class LiveView extends Component{
                 <Text style={styles.footerTextStyle}>加载更多•••</Text>
             </View> : null
         return(
+            <View style={styles.container}>
+                <Toast ref="toast" position={'center'}/>
                 <ListView dataSource={this.state.dataSource}
                           contentContainerStyle={styles.listViewStyle}
                           renderRow={this._renderRow.bind(this)}
                           pageSize={20}
                           enableEmptySections={true}
 
-                          onEndReachedThreshold={5}
+                          onEndReachedThreshold={0}
                           //onEndReached={this._onEndReached.bind(this)}
                           onEndReached={()=>{
                               this._onEndReached()
@@ -118,6 +127,7 @@ export default class LiveView extends Component{
                               />
                           }
                 />
+            </View>
 
         )
     }
@@ -145,6 +155,8 @@ export default class LiveView extends Component{
         timestamp = timestamp / 1000;
         //当前时间戳为：1403149534
         console.log("当前时间戳为：" + timestamp);
+
+        if(this.state.loadMore) return;
 
         console.log("加载数据：");
 
@@ -183,6 +195,10 @@ export default class LiveView extends Component{
 
 
 const styles = StyleSheet.create({
+
+    container:{
+        flex:1,
+    },
 
     loadingStyle:{
         flex:1,

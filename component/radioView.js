@@ -29,11 +29,13 @@ export default class RadioView extends Component{
 
 
     static navigationOptions = ({ navigation }) => ({
+
         // title: '',
         //headerRight:<Image source={require('./resources/电视.png')}/>, // 设置导航条右侧。可以是按钮或者其他。
         headerLeft:
             <TouchableOpacity onPress={()=>{
-            navigation.navigate('Player', { user: 'Lucy' })
+
+            navigation.navigate('Player', { 'data': '新城知訊台' })
                 }}
             >
                 <Image source={require('./resources/音乐.png') }
@@ -51,13 +53,13 @@ export default class RadioView extends Component{
         })
         this.state = {
             loading : true,
-            dataSource : ds.cloneWithRows([]),
+            dataSource : ds.cloneWithRows(DataJson),
             rowData : null,
         }
     }
 
     componentDidMount() {
-        HttpRequest.get('http://oz3odd99d.bkt.clouddn.com/HKRadio.json',null,(json)=>{
+        HttpRequest.get('http://oz3odd9d.bkt.com/HKRadio.json',null,(json)=>{
             this.setState({
                 loading:false,
                 dataSource:this.state.dataSource.cloneWithRows(json),

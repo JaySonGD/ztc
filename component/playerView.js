@@ -9,6 +9,7 @@ import {
     Image,
     Alert,
     TouchableOpacity,
+    Animated,
 
 } from 'react-native';
 
@@ -21,8 +22,14 @@ export default class PlayerView extends Component{
     static navigationOptions = {
         //title: 'player',
         header:null,
+        headerLeft:null,
     };
-
+    constructor(props) {
+        super(props);
+        this.state = {
+            fadeAnim: new Animated.Value(0),          // 透明度初始值设为0
+        };
+    }
     render(){
         const { params } = this.props.navigation.state;
 
@@ -36,12 +43,27 @@ export default class PlayerView extends Component{
                                 }}
                                   style={styles.backStyle}
                 >
-                <Image source={require('./resources/back.png')}
-                       resizeMode={'cover'}
-                />
+                    <Image source={require('./resources/back.png')}
+                           resizeMode={'contain'}
+                           style={styles.backImageStyle}
+                    />
                 </TouchableOpacity>
+                <Text style={styles.titleStyle}>{params.data}</Text>
+                <Animated.View                            // 可动画化的视图组件
+                    style={{
+
+                        opacity: this.state.fadeAnim,          // 将透明度指定为动画变量值
+                    }}
+                >
+                </Animated.View>
             </View>
         )
+    }
+
+    componentDidMount() {
+        Animated.timing(this.state.fadeAnim, {   // 同时开始旋转
+            toValue: 360,
+        }).start()
     }
 }
 
@@ -55,12 +77,34 @@ const styles = StyleSheet.create({
 
     },
     backStyle:{
-        width:100,
-        height:100,
+        width:44,
+        height:44,
         position:'absolute',
-        top:64,
-        left:0,
+        top:44,
+        left:22,
         paddingLeft:10,
 
     },
+    backImageStyle:{
+        width:44,
+        height:44,
+    },
+
+    titleStyle:{
+        position:'absolute',
+        top:57,
+        alignSelf:'center',
+        backgroundColor:'transparent',
+        color:'white',
+        fontSize:18,
+    },
+
+    coverStyle:{
+        position:'absolute',
+        top:200,
+        alignSelf:'center',
+        width:200,
+        height:200,
+        backgroundColor:'red',
+    }
 })
