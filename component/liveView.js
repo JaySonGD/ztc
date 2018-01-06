@@ -101,13 +101,13 @@ export default class LiveView extends Component{
                           renderRow={this._renderRow.bind(this)}
                           pageSize={20}
                           enableEmptySections={true}
-
-                          onEndReachedThreshold={-20}
+                          ref = 'listview'
+                          onEndReachedThreshold={-100}
                           //onEndReached={this._onEndReached.bind(this)}
                           onEndReached={()=>{
                               this._onEndReached()
                           }}
-
+                          onScroll={this._onScroll.bind(this)}
                           renderFooter={() => FooterView}
 
                           refreshControl={
@@ -131,7 +131,11 @@ export default class LiveView extends Component{
 
         )
     }
-
+    _onScroll(){
+        // if (this.refs.listview.scrollProperties.offset + this.refs.listview.scrollProperties.visibleLength >= this.refs.listview.scrollProperties.contentLength){
+        //     this.refs.listView.scrollEndReached();
+        // }
+    }
     _onRefresh() {
         var timestamp = Date.parse(new Date());
         timestamp = timestamp / 1000;
@@ -207,7 +211,7 @@ const styles = StyleSheet.create({
     },
 
     listViewStyle:{
-        backgroundColor:'#e6e6e6',
+        backgroundColor:'#e9e9eF',
         flexDirection:'row',
         flexWrap:'wrap',
         // paddingBottom:10,
