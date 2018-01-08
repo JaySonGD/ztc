@@ -1095,6 +1095,14 @@ crc@3.3.0:
   version "3.3.0"
   resolved "http://registry.npm.taobao.org/crc/download/crc-3.3.0.tgz#fa622e1bc388bf257309082d6b65200ce67090ba"
 
+create-react-class@15.6.0:
+  version "15.6.0"
+  resolved "http://registry.npm.taobao.org/create-react-class/download/create-react-class-15.6.0.tgz#ab448497c26566e1e29413e883207d57cfe7bed4"
+  dependencies:
+    fbjs "^0.8.9"
+    loose-envify "^1.3.1"
+    object-assign "^4.1.1"
+
 create-react-class@^15.5.2:
   version "15.6.2"
   resolved "http://registry.npm.taobao.org/create-react-class/download/create-react-class-15.6.2.tgz#cf1ed15f12aad7f14ef5f2dfe05e6c42f91ef02a"
@@ -1388,7 +1396,7 @@ fbjs-scripts@^0.8.1:
     semver "^5.1.0"
     through2 "^2.0.0"
 
-fbjs@^0.8.14, fbjs@^0.8.16, fbjs@^0.8.9:
+fbjs@^0.8.14, fbjs@^0.8.16, fbjs@^0.8.9, fbjs@~0.8.9:
   version "0.8.16"
   resolved "http://registry.npm.taobao.org/fbjs/download/fbjs-0.8.16.tgz#5e67432f550dc41b572bf55847b8aca64e5337db"
   dependencies:
@@ -1746,6 +1754,10 @@ immutable@^3.8.1:
   version "3.8.2"
   resolved "http://registry.npm.taobao.org/immutable/download/immutable-3.8.2.tgz#c2439951455bb39913daf281376f1530e104adf3"
 
+immutable@~3.7.6:
+  version "3.7.6"
+  resolved "http://registry.npm.taobao.org/immutable/download/immutable-3.7.6.tgz#13b4d3cb12befa15482a26fe1b2ebae640071e4b"
+
 imurmurhash@^0.1.4:
   version "0.1.4"
   resolved "http://registry.npm.taobao.org/imurmurhash/download/imurmurhash-0.1.4.tgz#9218b9b2b928a238b13dc4fb6b6d576f231453ea"
@@ -1985,6 +1997,10 @@ jsprim@^1.2.2:
     json-schema "0.2.3"
     verror "1.10.0"
 
+keymirror@0.1.1:
+  version "0.1.1"
+  resolved "http://registry.npm.taobao.org/keymirror/download/keymirror-0.1.1.tgz#918889ea13f8d0a42e7c557250eee713adc95c35"
+
 kind-of@^3.0.2:
   version "3.2.2"
   resolved "http://registry.npm.taobao.org/kind-of/download/kind-of-3.2.2.tgz#31ea21a734bab9bbb0f32466d893aea51e4a3c64"
@@ -2124,7 +2140,7 @@ lodash.templatesettings@^3.0.0:
     lodash._reinterpolate "^3.0.0"
     lodash.escape "^3.0.0"
 
-lodash@4.17.4, lodash@^4.14.0, lodash@^4.16.6, lodash@^4.17.4, lodash@^4.3.0, lodash@^4.6.1:
+lodash@4.17.4, lodash@^4.0.0, lodash@^4.14.0, lodash@^4.16.6, lodash@^4.17.4, lodash@^4.3.0, lodash@^4.6.1:
   version "4.17.4"
   resolved "http://registry.npm.taobao.org/lodash/download/lodash-4.17.4.tgz#78203a4d1c328ae1d86dca6460e369b57f4055ae"
 
@@ -2736,6 +2752,17 @@ react-devtools-core@^2.5.0:
     shell-quote "^1.6.1"
     ws "^2.0.3"
 
+react-native-deprecated-custom-components@facebookarchive/react-native-custom-components:
+  version "0.1.1"
+  resolved "https://codeload.github.com/facebookarchive/react-native-custom-components/tar.gz/83c4fa19ccc9b6cd48ff80e457c493332819b486"
+  dependencies:
+    create-react-class "15.6.0"
+    fbjs "~0.8.9"
+    immutable "~3.7.6"
+    prop-types "^15.5.10"
+    react-timer-mixin "^0.13.2"
+    rebound "^0.0.13"
+
 react-native-dismiss-keyboard@1.0.0:
   version "1.0.0"
   resolved "http://registry.npm.taobao.org/react-native-dismiss-keyboard/download/react-native-dismiss-keyboard-1.0.0.tgz#32886242b3f2317e121f3aeb9b0a585e2b879b49"
@@ -2752,6 +2779,12 @@ react-native-drawer-layout@1.3.2:
   dependencies:
     react-native-dismiss-keyboard "1.0.0"
 
+react-native-easy-toast@^1.0.9:
+  version "1.0.9"
+  resolved "http://registry.npm.taobao.org/react-native-easy-toast/download/react-native-easy-toast-1.0.9.tgz#85b28ccd8f6dfb67495320a47c275d3fe163e660"
+  dependencies:
+    prop-types "^15.5.10"
+
 react-native-tab-navigator@^0.3.4:
   version "0.3.4"
   resolved "http://registry.npm.taobao.org/react-native-tab-navigator/download/react-native-tab-navigator-0.3.4.tgz#54a18f1ad06a09d4a0de81ff00416bc1b760c960"
@@ -2763,6 +2796,21 @@ react-native-tab-view@^0.0.70:
   version "0.0.70"
   resolved "http://registry.npm.taobao.org/react-native-tab-view/download/react-native-tab-view-0.0.70.tgz#1dd2ded32acd0cb6bfef38d26e53675db733b37b"
   dependencies:
+    prop-types "^15.5.10"
+
+react-native-vector-icons@^4.4.3:
+  version "4.4.3"
+  resolved "http://registry.npm.taobao.org/react-native-vector-icons/download/react-native-vector-icons-4.4.3.tgz#9e847b8c432a17e5e0ffd60ccf09f3112a18b9df"
+  dependencies:
+    lodash "^4.0.0"
+    prop-types "^15.5.10"
+    yargs "^8.0.2"
+
+react-native-video@^2.0.0:
+  version "2.0.0"
+  resolved "http://registry.npm.taobao.org/react-native-video/download/react-native-video-2.0.0.tgz#f33fa6fb7e7e3c93ab5787944cefd58bf7355867"
+  dependencies:
+    keymirror "0.1.1"
     prop-types "^15.5.10"
 
 react-native@0.51.0:
@@ -2897,6 +2945,10 @@ readable-stream@~1.1.8, readable-stream@~1.1.9:
     inherits "~2.0.1"
     isarray "0.0.1"
     string_decoder "~0.10.x"
+
+rebound@^0.0.13:
+  version "0.0.13"
+  resolved "http://registry.npm.taobao.org/rebound/download/rebound-0.0.13.tgz#4a225254caf7da756797b19c5817bf7a7941fac1"
 
 regenerate@^1.2.1:
   version "1.3.3"
@@ -3670,6 +3722,24 @@ yargs-parser@^7.0.0:
   resolved "http://registry.npm.taobao.org/yargs-parser/download/yargs-parser-7.0.0.tgz#8d0ac42f16ea55debd332caf4c4038b3e3f5dfd9"
   dependencies:
     camelcase "^4.1.0"
+
+yargs@^8.0.2:
+  version "8.0.2"
+  resolved "http://registry.npm.taobao.org/yargs/download/yargs-8.0.2.tgz#6299a9055b1cefc969ff7e79c1d918dceb22c360"
+  dependencies:
+    camelcase "^4.1.0"
+    cliui "^3.2.0"
+    decamelize "^1.1.1"
+    get-caller-file "^1.0.1"
+    os-locale "^2.0.0"
+    read-pkg-up "^2.0.0"
+    require-directory "^2.1.1"
+    require-main-filename "^1.0.1"
+    set-blocking "^2.0.0"
+    string-width "^2.0.0"
+    which-module "^2.0.0"
+    y18n "^3.2.1"
+    yargs-parser "^7.0.0"
 
 yargs@^9.0.0:
   version "9.0.1"
