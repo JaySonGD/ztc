@@ -49,9 +49,11 @@ export default class HomeView extends Component{
                     style={{marginTop: -5,marginBottom:10 }}
                     initialPage={0}
                     renderTabBar={() => <ScrollableTabBar />}
-                    onChange={()=>{
+                    onChangeTab={()=>{
                         alert(13)
                     }}
+                    tabBarUnderlineStyle={{height:2,backgroundColor:'red'}}
+                    tabBarActiveTextColor="red"
                 >
                     {
                         this.state.typeArr.map((item,i)=>{
