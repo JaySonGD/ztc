@@ -8,6 +8,7 @@ import {
     View,
     Text,
     Image,
+    StyleSheet,
 } from 'react-native';
 
 import TabNavigator from 'react-native-tab-navigator';
@@ -18,11 +19,11 @@ import Profile from '../pages/profile/profileView';
 import Middle from '../pages/profile/profileView';
 
 const tabBarItems = [
-    { title: '精华', icon: () =>  <Icon name="ios-home" size={30} color='#333' style={{marginTop:20}}/>,
-        selectedIcon: () => <Icon name="ios-home" size={30} color='#d81e06' style={{marginTop:20}}/>
-        ,component: Home },
-    { title: null, icon: () => <Icon name="md-add-circle" size={48} color='#d81e06' />,
-       selectedIcon: () => <Icon name="md-add-circle" size={48} color='#d81e06' />,
+    { title: '精华', icon: () => <Image style={styles.tabIconStyle} source={require('../resource/home .png')}/>,
+        selectedIcon: () => <Image style={styles.tabIconStyle} source={require('../resource/home_select.png')}/>,
+        component: Home },
+    { title: null, icon:() => <Image style={styles.tabIconAddStyle} source={require('../resource/add.png')}/>,
+       selectedIcon: () => <Image style={styles.tabIconAddStyle} source={require('../resource/add_select.png')}/>,
         component: Middle },
     // { title: '发现', icon: () => <Icon name="md-paper-plane" size={30} color='#333' style={{marginTop:20}}/>,
     //  selectedIcon: () => <Icon name="md-paper-plane" size={30} color='#d81e06' style={{marginTop:20}}/>,
@@ -30,8 +31,8 @@ const tabBarItems = [
     // { title: '收藏', icon: () => <Icon name="ios-star-outline" size={30} color='#333' style={{marginTop:20}}/>,
     //     selectedIcon: () => <Icon name="md-star" size={30} color='#d81e06' style={{marginTop:20}}/>,
     //     component: Main },
-    { title: '我的', icon: () => <Icon name="md-contact" size={30} color='#333' style={{marginTop:20}}/>,
-        selectedIcon: () => <Icon name="md-contact" size={30} color='#d81e06' style={{marginTop:20}}/>,
+    { title: '我的', icon: () => <Image style={styles.tabIconStyle} source={require('../resource/wode.png')}/>,
+        selectedIcon: () => <Image style={styles.tabIconStyle} source={require('../resource/wode_select.png')}/>,
         component: Profile },
 ];
 
@@ -44,7 +45,7 @@ export default class tabBar extends Component {
     }
     render(){
         return(
-            <TabNavigator tabBarStyle={{height:49}}>
+            <TabNavigator tabBarStyle={styles.tabBarStyle}>
                 {
                     tabBarItems.map((controller,i) => {
                         let Component = controller.component;
@@ -56,9 +57,10 @@ export default class tabBar extends Component {
                                 renderIcon = {controller.icon}
                                 renderSelectedIcon = {controller.selectedIcon}
                                 onPress={() => this.setState({selectedTab:controller.title})}
-                                titleStyle={{color:'#333',fontSize:12}}
-                                selectedTitleStyle={{color:'rgb(251,33,33)'}}
+                                titleStyle={styles.titleStyle}
+                                selectedTitleStyle={styles.selectedTitleStyle}
                                 allowFontScaling={true}
+
                             >
                                 <Component navigator = {this.props.navigator} {...this.props} />
                             </TabNavigator.Item>
@@ -70,3 +72,26 @@ export default class tabBar extends Component {
     }
 }
 
+const styles = StyleSheet.create({
+    tabBarStyle:{
+        height:49,
+    },
+    tabIconStyle:{
+        width: 25,
+        height: 25,
+        resizeMode: 'stretch',
+    },
+    tabIconAddStyle:{
+        width: 40,
+        height: 40,
+        resizeMode: 'stretch',
+        position: 'relative',top: 8.5,
+    },
+    titleStyle:{
+        color:'#333',
+        fontSize:12,
+    },
+    selectedTitleStyle:{
+        color:'rgb(251,33,33)',
+    },
+})
