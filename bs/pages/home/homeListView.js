@@ -13,6 +13,7 @@ import {
     TouchableOpacity,
 } from 'react-native';
 import Toast, {DURATION} from 'react-native-easy-toast';
+import ActionSheet from 'react-native-actionsheet';
 
 import HttpRequest from '../../common/httpRequest';
 import Config from '../../common/config';
@@ -20,6 +21,16 @@ import Config from '../../common/config';
 const {width, height} = Dimensions.get('window');
 
 let items=[];
+
+const CANCEL_INDEX = 0
+const DESTRUCTIVE_INDEX = 2
+const options  = [
+    '取消',
+    '色情',
+    '拉死'
+]
+const message = '你确定要举报该用户?'
+const title = '举报类型'
 
 export default class HomeListView extends Component{
 
@@ -76,6 +87,15 @@ export default class HomeListView extends Component{
                               />
                           }
                           />
+                <ActionSheet
+                    ref={o => this.ActionSheet = o}
+                    title={title}
+                    message={message}
+                    options={options}
+                    cancelButtonIndex={CANCEL_INDEX}
+                    destructiveButtonIndex={DESTRUCTIVE_INDEX}
+                    onPress={this.handlePress.bind(this)}
+                />
             </View>
         )
     }
@@ -114,26 +134,14 @@ export default class HomeListView extends Component{
             })
         })
     }
-    _showActionSheet() {
-        let BUTTONS = [
-            '色情',
-            '拉死',
-            '取消'
-        ];
-        let DESTRUCTIVE_INDEX = 1;
-        let CANCEL_INDEX = 2;
 
-        ActionSheetIOS.showActionSheetWithOptions({
-                title:'举报类型',
-                message:'你确定要举报该用户',
-                options: BUTTONS,
-                cancelButtonIndex: CANCEL_INDEX,
-                destructiveButtonIndex: DESTRUCTIVE_INDEX,
-            },
-            (buttonIndex) => {
-                console.log(buttonIndex)
-                if(buttonIndex != 2) this.refs.toast.show('举报成功！');
-            });
+    showActionSheet() {
+        this.ActionSheet.show()
+    }
+
+    handlePress(buttonIndex) {
+        console.log(buttonIndex)
+        if(buttonIndex != 0) this.refs.toast.show('举报成功！');
     }
     _onRefresh() {
         var timestamp = Date.parse(new Date());
@@ -185,7 +193,7 @@ export default class HomeListView extends Component{
                                       // onPress={()=>this._showActionSheet()}
                                       // onPress={this._showActionSheet.bind(this)}
                                       onPress={()=>{
-                                          this._showActionSheet()
+                                          this.showActionSheet()
                                       }}
                     >
                         <Image source={require('../../resource/more.png')}

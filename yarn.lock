@@ -2752,6 +2752,10 @@ react-devtools-core@^2.5.0:
     shell-quote "^1.6.1"
     ws "^2.0.3"
 
+react-native-actionsheet@^2.3.0:
+  version "2.3.0"
+  resolved "http://registry.npm.taobao.org/react-native-actionsheet/download/react-native-actionsheet-2.3.0.tgz#a9552a356dc5939829062353804d5e5609e8f969"
+
 react-native-deprecated-custom-components@facebookarchive/react-native-custom-components:
   version "0.1.1"
   resolved "https://codeload.github.com/facebookarchive/react-native-custom-components/tar.gz/83c4fa19ccc9b6cd48ff80e457c493332819b486"
