@@ -7,11 +7,13 @@ import {
     Text,
     StyleSheet,
     Alert,
+    ActivityIndicator,
 } from 'react-native';
 
 import NavigationBar from 'react-native-navbar';
 import ScrollableTabView , {DefaultTabBar, ScrollableTabBar}  from 'react-native-scrollable-tab-view';
 
+import HomeListView from './homeListView';
 
 export default class HomeView extends Component{
 
@@ -25,9 +27,16 @@ export default class HomeView extends Component{
                 {'title':'段子', 'type':'29',},
                 {'title':'声音 ', 'type':'31',},
             ],
+            loading : false,
         }
     }
 
+    _renderLoading(){
+        return(<ActivityIndicator style={styles.loadingStyle}
+                                  animating={this.state.loading}
+                                  size="large"
+        />)
+    }
 
     render(){
 
@@ -45,24 +54,24 @@ export default class HomeView extends Component{
                     }}
                     style={styles.navigationBarStyle}
                 />
+                {this.state.loading? this._renderLoading():
                 <ScrollableTabView
-                    style={{marginTop: -5,marginBottom:10 }}
-                    initialPage={0}
-                    renderTabBar={() => <ScrollableTabBar />}
-                    onChange={()=>{
-                        alert(13)
-                    }}
+                    renderTabBar={() => <ScrollableTabBar/>}
+                    tabBarActiveTextColor='red'
+                    tabBarInactiveTextColor='#rgb(67,67,67)'
+                    tabBarBackgroundColor='#f7f7f7'
+                    style={{height:10}}
+                    tabBarUnderlineStyle={{backgroundColor:'red',height:2}}
                 >
                     {
-                        this.state.typeArr.map((item,i)=>{
-                            return(
-                                <View key={i} tabLabel={item.title} type={item.type}
+                        this.state.typeArr.map((item, i) => {
+                            return (
+                                <HomeListView key={i} tabLabel={item.title} type={item.type}
                                           navigator={this.props.navigator} {...this.props}/>
                             )
                         })
                     }
-                </ScrollableTabView>
-                <Text>段子王--homeView</Text>
+                </ScrollableTabView>}
             </View>
         )
 
